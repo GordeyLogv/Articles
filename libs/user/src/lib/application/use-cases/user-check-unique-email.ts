@@ -4,6 +4,6 @@ export class UserCheckUniqueEmail {
   constructor(private readonly userRepository: UserRepositoryPort) {}
 
   public async execute(email: string): Promise<boolean> {
-    return await this.userRepository.findByEmail(email);
+    return await this.userRepository.checkExistEmail(email);
   }
 }

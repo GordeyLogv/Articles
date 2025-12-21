@@ -1,6 +1,7 @@
-import { User } from '../../domain';
+import { User } from '../../../domain';
 
 export interface UserRepositoryPort {
-  findByEmail: (email: string) => Promise<boolean>;
+  findUserAuthData: (email: string) => Promise<{ userId: string; passwordHash: string } | null>;
+  checkExistEmail: (email: string) => Promise<boolean>;
   save: (user: User) => Promise<void>;
 }

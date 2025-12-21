@@ -13,5 +13,5 @@
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src/**/*.ts", "../auth/src/lib/application/use-cases/user-login.ts"]
+  "include": ["src/**/*.ts"]
 }

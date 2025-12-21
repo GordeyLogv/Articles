@@ -1,4 +1,4 @@
-import { UserCreateCommand, UserCreateResult, UserCreateResultFactory, UserCreateError } from '../../contracts';
+import { UserRegisterCommand, UserRegisteResult, UserRegisterResultFactory, UserRegisterError } from '../../contracts';
 import { UserRepositoryPort, LoggerPort, CommandRepositoryPort, CorrelationContextPort } from '../ports';
 import { UserRegisterMessages } from '../messages';
 import { UserCheckUniqueEmail } from './user-check-unique-email';
@@ -13,7 +13,7 @@ export class UserRegisterUseCase {
     private readonly сheckEmail: UserCheckUniqueEmail,
   ) {}
 
-  public async execute(command: UserCreateCommand): Promise<UserCreateResult> {
+  public async execute(command: UserRegisterCommand): Promise<UserRegisteResult> {
     const correlationId = this.correlationContext.getCorrelationId();
 
     const { commandId, email, userId } = command;
@@ -21,7 +21,7 @@ export class UserRegisterUseCase {
     const isProcessed = await this.commandReposirory.isProcessed(command.commandId);
     if (isProcessed) {
       this.logger.info(UserRegisterMessages.COMMAND_ALREADY_PROCESSED, { correlationId, commandId });
-      return UserCreateResultFactory.failed(UserCreateError.COMMAND_ALREADY_PROCESSED);
+      return UserRegisterResultFactory.failed(UserRegisterError.COMMAND_ALREADY_PROCESSED);
     }
 
     const isUniqueEmail = await this.сheckEmail.execute(email);
@@ -32,7 +32,7 @@ export class UserRegisterUseCase {
         email,
       });
       await this.commandReposirory.completeProcessed(commandId);
-      return UserCreateResultFactory.failed(UserCreateError.EMAIL_ALREADY_EXISTS);
+      return UserRegisterResultFactory.failed(UserRegisterError.EMAIL_ALREADY_EXISTS);
     }
 
     const tempUser = UserFactory.createNew({
@@ -52,6 +52,6 @@ export class UserRegisterUseCase {
       userId,
     });
 
-    return UserCreateResultFactory.success(userId);
+    return UserRegisterResultFactory.success(userId);
   }
 }

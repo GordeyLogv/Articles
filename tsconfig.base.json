@@ -16,7 +16,8 @@
     "baseUrl": ".",
     "strictPropertyInitialization": false,
     "paths": {
-      "@articles/user": ["libs/user/src/index.ts"]
+      "@articles/user": ["libs/user/src/index.ts"],
+      "@articles/auth": ["libs/auth/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
