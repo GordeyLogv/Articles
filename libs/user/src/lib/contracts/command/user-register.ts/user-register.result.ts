@@ -4,4 +4,4 @@ export type UserRegisterSucces = { success: true; userId: string };
 
 export type UserRegisterFailed = { success: false; error: UserRegisterError };
 
-export type UserRegisteResult = UserRegisterSucces | UserRegisterFailed;
+export type UserRegisterResult = UserRegisterSucces | UserRegisterFailed;

@@ -17,7 +17,8 @@
     "strictPropertyInitialization": false,
     "paths": {
       "@articles/user": ["libs/user/src/index.ts"],
-      "@articles/auth": ["libs/auth/src/index.ts"]
+      "@articles/auth": ["libs/auth/src/index.ts"],
+      "@articles/shared": ["libs/shared/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
